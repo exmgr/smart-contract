@@ -1,0 +1,36 @@
+{
+  "name": "exm_weather",
+  "initiators": [
+    {
+      "type": "runlog",
+      "params": {
+        "address": "0x0000000000000000000000000000000000000000"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "type": "weather"
+    },
+    {
+      "type": "copy",
+      "params": {
+        "copyPath": [
+          "wind_gust"
+        ]
+      }
+    },
+    {
+      "type": "multiply",
+      "params": {
+        "times": 100
+      }
+    },
+    {
+      "type": "ethuint256"
+    },
+    {
+      "type": "ethtx"
+    }
+  ]
+}
