@@ -1,19 +1,31 @@
-# Contract
-Solidity contract to obtain weather data from IPFS via oracle adapter.
+# Smart Contract Factory & Marketplace
 
-## Setting up oracle contract and adapter
-Use [Remix](https://remix.ethereum.org) Web IDE to deploy and test contracts.
-1. Deploy Oracle contract in ```Oracle.sol```
-1. On the deployed contract call setFulfillmentPermission with the parameters ```[your chainlink node address], true```
-1. Create bridge in Chainlink node named "weather", pointing to the URL of the adapter (```ipfs-middleware``` repository)
-1. Create job and use definition from ```jobspec.json```, setting the ```address``` key to the address of the newly deployed oracle.
+We implemented a smart contract factory mechanism where a (potential) insurance company can fund a ETH wallet with “collateral” and a farmer can create a new “weather protection contract” on his/her own using Metamask and our front-end web app.
 
-## Setting up and deploying contract
+New contracts are stored on ETHEREUM blockchain (Kovan via infrura) and their execution is triggered on a daily basis (for the period selected by farmer), via the CHAINLINK node which goes through all the system components, getting weather data from IPFS and 3rd party API, and checking contract conditions to decide if it should be paid, and in such event making the money transfer to farmer’s wallet.
 
-1. Populate EXMWeatherConsumer contract variables:
-    * **oracle** Address of the above deployed oracle contract.
-    * **jobId** ID of job created above.
-    * **weatherGeohash** Geohash of weather station used as data source.
-1. Fund deployed contract with 0.1 LINK.
-1. Once the contract is deployed, call ```requestWeatherData()``` on it
-1. Wait for confirmation, once it is finished, click "result" and the contract returns the  ```Wind Gust``` parameter of the weather station (multiplied by 100 in m/S).
+## Web app
+
+The [app](./app) directory contains the source code of a web frontend application, written in React, that facilitates contract creation.
+
+## Contracts
+
+The [contracts](./contracts) directory contains the smart contracts, written in Solidity.
+
+## License
+
+```
+Copyright 2020 EXM P.C.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
